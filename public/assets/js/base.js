@@ -336,6 +336,12 @@ function offlineModeToast() {
             <div class="in"><div class="text">${OfflineText}</div></div>
         </div>`
     );
+    setTimeout(() => {
+        $(`#${toastId}`).addClass('opacity-0');
+        setTimeout(() => {
+            $(`#${toastId}`).remove();
+        }, 500); // tunggu transisi hilang
+    }, 3000);
 }
 
 // Online Mode Function
