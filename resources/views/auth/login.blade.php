@@ -4,18 +4,27 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#004AAD">
-    <title>Login - Presensi PKL</title>
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ config('app.url') }}">
+    <meta property="og:title" content="Presensi PKL" />
+    <meta property="og:description" content="Siakad PKL SMK Prestasi Prima" />
+    <meta property="og:image" content="{{ asset('assets/img/icon-512.png') }}" />
     <meta name="description" content="Siakad PKL SMK Prestasi Prima">
     <meta name="keywords" content="SIAKAD PKL SMK PRESTASI PRIMA" />
+    <meta name="theme-color" content="#004AAD">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Presensi PKL</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     
     <!-- KOREKSI: Path gambar diubah untuk menyertakan '/assets/' -->
     <link rel="icon" type="image/png" href="{{ asset('assets/img/icon-512.png') }}" sizes="32x32">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/img/icon-512.png') }}">
 
-    <style>
+    {{-- <style>
         /* Google Fonts - Poppins */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
@@ -118,11 +127,33 @@
             width: 20px;
             margin-right: 12px;
         }
+    </style> --}}
+
+    <style>
+        .animated-background {
+            background-size: 400%;
+
+            -webkit-animation: animation 10s ease infinite;
+            -moz-animation: animation 10s ease infinite;
+            animation: animation 10s ease infinite;
+        }
+
+        @keyframes animation {
+            0%,
+            100% {
+                background-position: 100%;
+            }
+            
+            50% {
+                background-position: 50%;
+            }
+        }
     </style>
+    
 </head>
 
-<body>
-    <section class="container forms">
+<body class="font-['Poppins'] bg-gray-950 bg-gradient-to-br animated-background from-orange-900 to-gray-950 w-full min-h-screen flex items-center justify-center text-white">
+{{-- <section class="bg-red-200">
         <div class="form login">
             <!-- KOREKSI: Path gambar diubah untuk menyertakan '/assets/' -->
             <img src="{{ asset('assets/img/icon-512.png') }}" alt="Logo" style="width: 80px; height: auto; display: block; margin: 0 auto 20px;">
@@ -143,6 +174,33 @@
                 <b>Created by Orens Solution Prestasi Prima</b>
             </div>
         </div>
+    </section> --}}
+
+    <section class="w-full max-w-lg h-full flex flex-col items-center justify-center text-center px-6">
+        <div class="flex flex-col items-center gap-6 rounded-2xl py-10 px-6 w-full">
+            <img src="{{ asset('assets/img/icon-512.png') }}" class="min-w-20 sm:min-w-24 h-20 sm:h-24 object-contain rounded-full select-none hover:opacity-80 transition" draggable="false" alt="Logo" title="SMK Prestasi Prima">
+            <div class="flex flex-col tracking-wide">
+                <h1 class="text-3xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-300 mb-1">Presensi PKL</h1>
+                <span class="text-base sm:text-xl text-gray-300 font-extrabold">SMK Prestasi Prima</span>
+            </div>
+            <p class="text-gray-300 text-sm sm:text-base mb-2">Selamat datang di <span class="text-orange-400">Aplikasi Presensi PKL</span>.<br>Silakan login menggunakan akun sekolah Anda.</p>
+        </div>
+    </section>
+    <section class="fixed bottom-6 flex flex-col w-5/6 max-w-md">
+        <a href="/auth/google" title="Login dengan Akun Sekolah" class="w-full flex items-center justify-center py-3 gap-3 bg-blue-950 hover:bg-blue-950/50 transition transform active:scale-95 rounded-lg shadow-lg border border-white/10 select-none text-sm sm:text-base mb-3">
+            <svg viewBox="-3 0 262 262" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" fill="#000000" class="min-w-5 sm:min-w-6 h-5 sm:h-6">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                    <path d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622 38.755 30.023 2.685.268c24.659-22.774 38.875-56.282 38.875-96.027" fill="#4285F4"></path>
+                    <path d="M130.55 261.1c35.248 0 64.839-11.605 86.453-31.622l-41.196-31.913c-11.024 7.688-25.82 13.055-45.257 13.055-34.523 0-63.824-22.773-74.269-54.25l-1.531.13-40.298 31.187-.527 1.465C35.393 231.798 79.49 261.1 130.55 261.1" fill="#34A853"></path>
+                    <path d="M56.281 156.37c-2.756-8.123-4.351-16.827-4.351-25.82 0-8.994 1.595-17.697 4.206-25.82l-.073-1.73L15.26 71.312l-1.335.635C5.077 89.644 0 109.517 0 130.55s5.077 40.905 13.925 58.602l42.356-32.782" fill="#FBBC05"></path>
+                    <path d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0 79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251" fill="#EB4335"></path>
+                </g>
+            </svg>
+            <span class="text-gray-300 font-semibold tracking-wide">Login dengan Akun Sekolah</span>
+        </a>
+        <span class="w-full flex justify-center text-gray-500 text-xs">&copy; Orens Solutions {{ date('Y') }}</span>
     </section>
 
     <!-- ///////////// Js Files ////////////////////  -->

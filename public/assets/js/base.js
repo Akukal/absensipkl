@@ -307,39 +307,41 @@ $(window).scroll(function () {
 // Offline Mode / Online Mode Detection
 
 // You can change the texts here
-var OnlineText = "Connected to Internet";
+var OnlineText = "Connected to the Internet";
 var OfflineText = "No Internet Connection";
 
 // Online Mode Toast Append
 function onlineModeToast() {
+    // Tambahkan toast dengan Tailwind, auto hilang setelah 3 detik
+    const toastId = 'online-toast-' + Date.now();
     $("body").append(
-        "<div id='online-toast' class='toast-box bg-success toast-top tap-to-close'>"
-        +
-        "<div class='in'><div class='text'>"
-        +
-        OnlineText
-        +
-        "</div></div></div>"
+        `<div id="${toastId}" class="fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-lime-800 text-white px-4 py-2 rounded shadow-lg transition-opacity duration-500 opacity-100">
+            <div class="in"><div class="text">${OnlineText}</div></div>
+        </div>`
     );
     setTimeout(() => {
-        toastbox('online-toast', 3000);
-    }, 500);
+        $(`#${toastId}`).addClass('opacity-0');
+        setTimeout(() => {
+            $(`#${toastId}`).remove();
+        }, 500); // tunggu transisi hilang
+    }, 3000);
 }
 
 // Ofline Mode Toast Append
 function offlineModeToast() {
+    // Versi online: toast offline dengan style dan animasi tailwind, auto hilang setelah 3 detik
+    const toastId = 'offline-toast-' + Date.now();
     $("body").append(
-        "<div id='offline-toast' class='toast-box bg-danger toast-top tap-to-close'>"
-        +
-        "<div class='in'><div class='text'>"
-        +
-        OfflineText
-        +
-        "</div></div></div>"
+        `<div id="${toastId}" class="fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-red-700 text-white px-4 py-2 rounded shadow-lg transition-opacity duration-500 opacity-100">
+            <div class="in"><div class="text">${OfflineText}</div></div>
+        </div>`
     );
     setTimeout(() => {
-        toastbox('offline-toast');
-    }, 500);
+        $(`#${toastId}`).addClass('opacity-0');
+        setTimeout(() => {
+            $(`#${toastId}`).remove();
+        }, 500); // tunggu transisi hilang
+    }, 3000);
 }
 
 // Online Mode Function
