@@ -179,14 +179,14 @@
     <section class="w-full max-w-lg h-full flex flex-col items-center justify-center text-center px-6">
         <div class="flex flex-col items-center gap-6 rounded-2xl py-10 px-6 w-full">
             <img src="{{ asset('assets/img/icon-512.png') }}" class="min-w-20 sm:min-w-24 h-20 sm:h-24 object-contain rounded-full select-none hover:opacity-80 transition" draggable="false" alt="Logo" title="SMK Prestasi Prima">
-            <div class="flex-1 tracking-wide">
+            <div class="flex flex-col tracking-wide">
                 <h1 class="text-3xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-300 mb-1">Presensi PKL</h1>
                 <span class="text-base sm:text-xl text-gray-300 font-extrabold">SMK Prestasi Prima</span>
             </div>
             <p class="text-gray-300 text-sm sm:text-base mb-2">Selamat datang di <span class="text-orange-400">Aplikasi Presensi PKL</span>.<br>Silakan login menggunakan akun sekolah Anda.</p>
         </div>
     </section>
-    <section class="fixed bottom-6 w-5/6 max-w-md">
+    <section class="fixed bottom-6 flex flex-col w-5/6 max-w-md">
         <a href="/auth/google" title="Login dengan Akun Sekolah" class="w-full flex items-center justify-center py-3 gap-3 bg-blue-950 hover:bg-blue-950/50 transition transform active:scale-95 rounded-lg shadow-lg border border-white/10 select-none text-sm sm:text-base mb-3">
             <svg viewBox="-3 0 262 262" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" fill="#000000" class="min-w-5 sm:min-w-6 h-5 sm:h-6">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
