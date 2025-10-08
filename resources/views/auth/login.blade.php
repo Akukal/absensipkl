@@ -4,12 +4,17 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#004AAD">
-    <title>Login - Presensi PKL</title>
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ config('app.url') }}">
+    <meta property="og:title" content="Presensi PKL" />
+    <meta property="og:description" content="Siakad PKL SMK Prestasi Prima" />
+    <meta property="og:image" content="{{ asset('assets/img/icon-512.png') }}" />
     <meta name="description" content="Siakad PKL SMK Prestasi Prima">
     <meta name="keywords" content="SIAKAD PKL SMK PRESTASI PRIMA" />
+    <meta name="theme-color" content="#004AAD">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Presensi PKL</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -147,7 +152,7 @@
     
 </head>
 
-<body class="font-['Poppins'] bg-gradient-to-br animated-background from-orange-900 to-gray-950 w-full min-h-screen flex items-center justify-center text-white">
+<body class="font-['Poppins'] bg-gray-950 bg-gradient-to-br animated-background from-orange-900 to-gray-950 w-full min-h-screen flex items-center justify-center text-white">
 {{-- <section class="bg-red-200">
         <div class="form login">
             <!-- KOREKSI: Path gambar diubah untuk menyertakan '/assets/' -->
