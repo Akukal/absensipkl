@@ -5,7 +5,7 @@
 @endphp
 @section('header')
     <!-- App Header -->
-    <div class="appHeader bg-primary text-light">
+    {{-- <div class="appHeader bg-primary text-light">
         <div class="left">
             <a href="javascript:;" class="headerButton goBack">
                 <ion-icon name="chevron-back-outline"></ion-icon>
@@ -13,7 +13,7 @@
         </div>
         <div class="pageTitle">E-Presensi</div>
         <div class="right"></div>
-    </div>
+    </div> --}}
     <!-- * App Header -->
     <style>
         .webcam-capture,
@@ -65,7 +65,7 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
-        .attendance-option {
+        /* .attendance-option {
             display: flex;
             align-items: center;
             padding: 10px 15px;
@@ -74,20 +74,23 @@
             border-radius: 8px;
             cursor: pointer;
             transition: all 0.3s ease;
-        }
+        } 
 
         .attendance-option:hover {
             border-color: #007bff;
             background-color: #f8f9fa;
-        }
+        }*/
 
         .attendance-option.selected {
-            border-color: #007bff;
-            background-color: #e7f3ff;
+            border: 1px solid #fb923c; /* Tailwind's orange-400 */
+            color: #fb923c; /* Tailwind's orange-400 */
+            /* border:1px solid #374151; */
+            background-color: transparent;
         }
 
         .attendance-option input[type="radio"] {
             margin-right: 10px;
+            accent-color: #fb923c;
         }
 
         .attendance-option-content {
@@ -96,7 +99,6 @@
 
         .attendance-option-title {
             font-weight: bold;
-            color: #333;
         }
 
         .attendance-option-desc {
@@ -105,7 +107,6 @@
             margin-top: 2px;
         }
         
-
         .disabled {
             pointer-events: none;
             opacity: 0.6;
@@ -115,13 +116,84 @@
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
 @endsection
 @section('content')
+    @php
+        // Data dummy siswa
+        $akun = (object)[
+            'nama' => 'NURUL FAJRIYAH'
+        ];
+        $siswa = (object)[
+            'kelas' => 'XII TKJ 2'
+        ];
+        $perusahaan = (object)[
+            'nama' => 'PT. Pintar Berjaya Digital'
+        ];
+
+        $absen = null;
+        // Variabel pendukung halaman
+        $showCameraSection = false; // Misal untuk tes, set tampil/tidak kamera
+        // Dummy hari (nama hari) dan waktu (lihat jam digital di dashboard)
+        setlocale(LC_TIME, 'id_ID.UTF-8');
+        $hari = 'Senin, 22 Januari 2024';
+    @endphp
+
+    <section class="w-full min-h-screen max-w-lg mx-auto flex flex-col py-20 justify-center gap-4 px-4 text-gray-300 py-28">
+        <div class="w-full flex flex-col items-center justify-center gap-6">
+            <div class="relative bg-gray-800 rounded-2xl shadow-2xl py-6 px-6 w-full max-w-md flex flex-col items-center gap-2 border border-gray-700">
+                <div class="attendance-option w-full flex items-center border border-gray-600 px-4 py-2 gap-2 rounded-lg select-none cursor-pointer" id="option-wfo" onclick="selectAttendanceType('WFO')">
+                    <input type="radio" id="wfo" name="attendance_type" value="WFO" class="hidden">
+                    <ion-icon name="laptop-outline" class="text-2xl"></ion-icon>
+                    <div class="">
+                        <div class="text-sm sm:text-base font-bold">Work From Office (WFO)</div>
+                        <div class="text-xs sm:text-sm">Hadir di kantor/tempat PKL</div>
+                    </div>
+                </div>
+                
+                <div class="attendance-option w-full flex items-center border border-gray-600 px-4 py-2 gap-2 rounded-lg select-none cursor-pointer" id="option-wfh" onclick="selectAttendanceType('WFH')">
+                    <input type="radio" id="wfh" name="attendance_type" value="WFH" class="hidden">
+                    <ion-icon name="business-outline" class="text-2xl"></ion-icon>
+                    <div class="">
+                        <div class="text-sm sm:text-base font-bold">Work From Home (WFH)</div>
+                        <div class="text-xs sm:text-sm">Bekerja dari rumah</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="camera-section w-full max-w-md flex flex-col mx-auto justify-center items-center bg-gray-800 rounded-2xl shadow-2xl border border-gray-700 py-6 px-6 gap-6 transition-all duration-300" style="display: {{ $showCameraSection ? 'block' : 'none' }};">
+            <div class="w-full flex flex-col items-center gap-4">
+                <!-- Webcam Capture Area -->
+                <div class="relative w-full flex flex-col items-center">
+                    <input type="hidden" id="lokasi">
+                    <input type="hidden" id="attendance_type_selected">
+                    <div class="webcam-capture bg-gray-900 rounded-xl border border-gray-700 w-full aspect-video flex items-center justify-center overflow-hidden">
+                        <!-- Kamera akan muncul di sini -->
+                    </div>
+                </div>
+                <!-- Maps Lokasi -->
+                <div class="w-full">
+                    <div id="map" class="relative -z-0 w-full rounded-xl border border-gray-700 h-52"></div>
+                </div>
+                <!-- Tanggal & Jam Digital -->
+                <div class="hidden w-full items-center my-4" id="time-section">
+                    <span class="font-semibold text-sm tracking-wide text-orange-400">{{ $hari }}</span>
+                    <span id="jam" class="text-2xl font-extrabold text-white mt-1"></span>
+                </div>
+                <!-- Tombol Absen -->
+                <button id="takeabsen" class="cursor-pointer select-none w-full flex items-center justify-center gap-1 py-2 rounded-lg bg-gradient-to-tr from-orange-500 to-orange-400 hover:from-orange-600 hover:to-orange-500 shadow-lg border-1 border-orange-700 text-white text-sm sm:text-base font-semibold transition focus:outline-none active:scale-95">
+                    <ion-icon name="camera-outline" class="text-lg sm:text-xl"></ion-icon>
+                    Absen
+                </button>
+            </div>
+        </div>
+    </section>
+
+    
     <!-- Attendance Type Selection -->
-    <div class="row" style="margin-top: 60px">
+    {{-- <div class="row absolute z-40" style="margin-top: 60px">
         <div class="col">
             <div class="attendance-type-selection">
                 <h6 class="mb-3">Pilih Jenis Kehadiran:</h6>
                 
-                <div class="attendance-option" id="option-wfo" onclick="selectAttendanceType('WFO')">
+                <div class="attendance-option border border-gray-600 px-4 py-2 rounded-lg" id="option-wfo" onclick="selectAttendanceType('WFO')">
                     <input type="radio" id="wfo" name="attendance_type" value="WFO">
                     <div class="attendance-option-content">
                         <div class="attendance-option-title">Work From Office (WFO)</div>
@@ -138,38 +210,40 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <!-- Camera and Map Section (Initially Hidden) -->
-    <div class="camera-section" style="display: {{ $showCameraSection ? 'block' : 'none' }};">
-        <div class="row">
-            <div class="col">
-                <input type="hidden" id="lokasi">
-                <input type="hidden" id="attendance_type_selected">
-                <div class="webcam-capture"></div>
+    {{-- <div class="w-full min-h-screen flex items-center justify-center">
+        <div class="camera-section w-full max-w-lg flex flex-col justify-center items-center bg-gray-800" style="display: {{ $showCameraSection ? 'block' : 'none' }};">
+            <div class="row">
+                <div class="col">
+                    <input type="hidden" id="lokasi">
+                    <input type="hidden" id="attendance_type_selected">
+                    <div class="webcam-capture"></div>
+                </div>
             </div>
-        </div>
 
-        <div class="jam-digital-malasngoding">
-            <p>{{ $hari }}</p>
-            <p id="jam"></p>
-        </div>
+            <div class="jam-digital-malasngoding">
+                <p>{{ $hari }}</p>
+                <p id="jam"></p>
+            </div> 
 
-        <div class="row">
-            <div class="col">
-                <button id="takeabsen" class="btn btn-primary btn-block">
-                    <ion-icon name="camera-outline"></ion-icon>
-                    Absen
-                </button>
+            <div class="row">
+                <div class="col">
+                    <button id="takeabsen" class="btn btn-primary btn-block">
+                        <ion-icon name="camera-outline"></ion-icon>
+                        Absen
+                    </button>
+                </div>
+            </div>
+            
+            <div class="row mt-2">
+                <div class="col">
+                    <div id="map"></div>
+                </div>
             </div>
         </div>
-        
-        <div class="row mt-2">
-            <div class="col">
-                <div id="map"></div>
-            </div>
-        </div>
-    </div>
+    </div> --}}
 
     <audio id="notifikasi_in">
         <source src="{{ asset('assets/sound/notifikasi_in.mp3') }}" type="audio/mpeg">
@@ -184,27 +258,27 @@
 
 @push('myscript')
     <script type="text/javascript">
-        window.onload = function() {
-            jam();
-        }
+        // window.onload = function() {
+        //     jam();
+        // }
 
-        function jam() {
-            var e = document.getElementById('jam'),
-                d = new Date(),
-                h, m, s;
-            h = d.getHours();
-            m = set(d.getMinutes());
-            s = set(d.getSeconds());
+        // function jam() {
+        //     var e = document.getElementById('jam'),
+        //         d = new Date(),
+        //         h, m, s;
+        //     h = d.getHours();
+        //     m = set(d.getMinutes());
+        //     s = set(d.getSeconds());
 
-            e.innerHTML = h + ':' + m + ':' + s;
+        //     e.innerHTML = h + ':' + m + ':' + s;
 
-            setTimeout('jam()', 1000);
-        }
+        //     setTimeout('jam()', 1000);
+        // }
 
-        function set(e) {
-            e = e < 10 ? '0' + e : e;
-            return e;
-        }
+        // function set(e) {
+        //     e = e < 10 ? '0' + e : e;
+        //     return e;
+        // }
 
         // Global variable to store map instance
         var mapInstance = null;

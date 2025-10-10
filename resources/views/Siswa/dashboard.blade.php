@@ -1,8 +1,8 @@
 @extends('layouts.presensi')
 @section('header')
-        <!-- App Header -->
+        {{-- <!-- App Header -->
         <div class="appHeader bg-primary text-light">
-            <div class="left">
+            {{-- <div class="left">
                 <a href="javascript:;" class="headerButton goBack">
                     <ion-icon name="chevron-back-outline"></ion-icon>
                 </a>
@@ -14,7 +14,7 @@
                 </a>
             </div>
         </div>
-        <!-- * App Header -->
+        <!-- * App Header --> --}}
 @endsection
 @section('content')
     <style>
@@ -30,7 +30,116 @@
             color: white;
         } 
     </style>
-    <div class="section" id="user-section">
+    @php
+        // Data dummyAn
+        $akun = (object)[
+            'nama' => 'DANENDRA RAHARDYAN DANARDI'
+        ];
+        $siswa = (object)[
+            'kelas' => 'XII RPL 1'
+        ];
+        $perusahaan = (object)[
+            'nama' => 'PT. Maju Jaya Abadi Pratama'
+        ];
+        // Dummy absen: Sudah absen masuk, belum absen keluar
+        $absen = (object)[
+            'jam_masuk' => '07:15:23',
+            'jam_keluar' => '16:00:01',
+            'status' => 'Hadir',
+            'foto_masuk' => null,
+            'foto_keluar' => null,
+            'foto' => null
+        ];
+    @endphp
+    
+    <section class="w-full max-w-lg min-h-screen mx-auto flex flex-col justify-center gap-4 text-gray-300 py-28">
+        <div class="w-full flex flex-col items-center justify-center gap-6 px-4">
+            <div class="relative bg-gray-800 rounded-2xl shadow-2xl py-6 px-8 w-full max-w-md flex items-center gap-4 border border-gray-700">
+                <span class="inline-flex items-center justify-center w-20 h-20 bg-gray-700 rounded-full">
+                    <ion-icon name="person-circle-outline" class="text-9xl text-white"></ion-icon>
+                </span>
+                <div>
+                    @php
+                        $namaAkun = $akun->nama;
+                        $namaLength = mb_strlen($namaAkun);
+                        $namaClass = $namaLength > 24 ? 'text-sm sm:text-base' : 'text-base sm:text-lg';
+                    @endphp
+                    <h3 class="{{ $namaClass }} font-bold text-white mb-1">{{ $namaAkun }}</h3>
+                    <p class="text-xs sm:text-sm text-gray-400 mb-1">{{ $siswa->kelas }}</p>
+                    <p class="text-xs sm:text-sm text-orange-400 font-semibold">{{ $perusahaan->nama }}</p>
+                </div>
+            </div>
+            <div class="relative bg-gray-800 rounded-2xl shadow-2xl py-6 px-8 w-full max-w-md flex flex-col sm:flex-row items-center border border-gray-700">
+                <span class="hidden sm:inline-flex items-center justify-center w-20 h-20 bg-gray-700 rounded-full">
+                    <ion-icon name="time-outline" class="text-7xl text-white"></ion-icon>
+                </span>
+                <div class="flex-1 w-full">
+                    <div class="grid grid-cols-2 divide-x divide-gray-700">
+                        <!-- Absen Masuk -->
+                        <div class="flex flex-col items-center py-4 px-3">
+                            <span class="text-gray-400 text-xs font-medium mb-1 tracking-wide">Absen Masuk</span>
+                            <span class="
+                                text-2xl font-bold 
+                                {{ is_null($absen) || (optional($absen)->jam_masuk == null && optional($absen)->status != 'Izin') ? 'text-red-600' : (optional($absen)->status == 'Izin' ? 'text-orange-400' : 'text-lime-400') }}
+                                ">
+                                {{ is_null($absen) ? '--:--:--' : (optional($absen)->status == 'Izin' ? 'Izin' : (optional($absen)->jam_masuk ?? '--:--:--')) }}
+                            </span>
+                        </div>
+                        <!-- Absen Keluar -->
+                        <div class="flex flex-col items-center py-4 px-3">
+                            <span class="text-gray-400 text-xs font-medium mb-1 tracking-wide">Absen Keluar</span>
+                            <span class="
+                                text-2xl font-bold 
+                                {{ is_null($absen) || (optional($absen)->jam_keluar == null && optional($absen)->status != 'Izin') ? 'text-red-600' : (optional($absen)->status == 'Izin' ? 'text-orange-400' : 'text-lime-400') }}
+                                ">
+                                {{ is_null($absen) ? '--:--:--' : (optional($absen)->status == 'Izin' ? 'Izin' : (optional($absen)->jam_keluar ?? '--:--:--')) }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="relative bg-gray-800 rounded-2xl shadow-2xl py-6 px-8 w-full max-w-md flex flex-col gap-4 border border-gray-700">
+                <span class="font-semibold text-white text-lg flex items-center gap-1">
+                    <ion-icon name="aperture-outline"></ion-icon>
+                    Absen Masuk
+                </span>
+                @if($absen && !empty($absen->foto_masuk) && $absen->status != 'Izin')
+                    <img 
+                        src="{{ asset('upload/foto_masuk/' . $absen->foto_masuk) }}" 
+                        alt="Foto Masuk" 
+                        class="w-full h-full object-cover rounded-xl border border-gray-600 bg-gray-900"
+                    >
+                @elseif ($absen && empty($absen->foto_masuk) && $absen->status != 'Izin')
+                    <span class="text-sm sm:text-base text-gray-400 italic">Belum ada foto masuk</span>
+                @elseif ($absen && $absen->status == 'Izin')
+                    <span class="text-sm sm:text-base text-orange-400 italic">Tidak ada foto (Izin)</span>
+                @else
+                    <span class="text-sm sm:text-base text-gray-400 italic">Tidak ada data absen hari ini</span>
+                @endif
+            </div>
+            <div class="relative bg-gray-800 rounded-2xl shadow-2xl py-6 px-8 w-full max-w-md flex flex-col gap-4 border border-gray-700">
+                <span class="font-semibold text-white text-lg flex items-center gap-1">
+                    <ion-icon name="aperture-outline"></ion-icon>
+                    Absen Keluar
+                </span>
+                @if($absen && !empty($absen->foto_keluar) && $absen->status != 'Izin')
+                    <img 
+                        src="{{ asset('upload/foto_keluar/' . $absen->foto_keluar) }}" 
+                        alt="Foto Keluar" 
+                        class="w-full h-full object-cover rounded-xl border border-gray-600 bg-gray-900"
+                    >
+                @elseif ($absen && empty($absen->foto_keluar) && $absen->status != 'Izin')
+                    <span class="text-sm sm:text-base text-gray-400 italic">Belum ada foto keluar</span>
+                @elseif ($absen && $absen->status == 'Izin')
+                    <span class="text-sm sm:text-base text-orange-400 italic">Tidak ada foto (Izin)</span>
+                @else
+                    <span class="text-sm sm:text-base text-gray-400 italic">Tidak ada data absen hari ini</span>
+                @endif
+            </div>
+        </div>
+    </section>
+    
+    {{-- <div class="section" id="user-section">
         <div id="user-detail" style="margin-top: 50px">
             <div id="user-info">
                 <h3 id="user-name">{{ $akun->nama }}</h3>
@@ -40,8 +149,8 @@
                 </p>
             </div>
         </div>
-    </div>
-    <div class="section" id="menu-section">
+    </div> --}}
+    {{-- <div class="section" id="menu-section">
         <div class="card">
             <div class="card-body text-center">
                 <div class="list-menu">
@@ -146,7 +255,7 @@
                 </div>
                 @endif
         </div>
-</div>
+</div>--}}
 @endsection
 
 @section('scripts')

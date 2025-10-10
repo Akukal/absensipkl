@@ -15,6 +15,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Presensi PKL</title>
+
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -141,13 +142,54 @@
         @keyframes animation {
             0%,
             100% {
-                background-position: 100%;
+                background-position: 80%;
             }
             
             50% {
-                background-position: 50%;
+                background-position: 40%;
             }
         }
+
+        .anim-open1 {
+            animation: opening 1s linear forwards;
+            opacity: 0;
+        }
+
+        .anim-open2 {
+            animation: opening 1s linear forwards;
+            animation-delay: 0.5s;
+            opacity: 0;
+        }
+
+        .anim-open3 {
+            animation: opening 1s linear forwards;
+            animation-delay: 0.7s;
+            opacity: 0;
+        }
+
+        .anim-open4 {
+            animation: opening 1s linear forwards;
+            animation-delay: 0.9s;
+            opacity: 0;
+        }
+
+        .anim-open5 {
+            animation: opening 1s linear forwards;
+            animation-delay: 1.1s;
+            opacity: 0;
+        }
+
+        .anim-open6 {
+            animation: opening 1s linear forwards;
+            animation-delay: 1.3s;
+            opacity: 0;
+        }
+
+        @keyframes opening {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
     </style>
     
 </head>
@@ -178,16 +220,16 @@
 
     <section class="w-full max-w-lg h-full flex flex-col items-center justify-center text-center px-6">
         <div class="flex flex-col items-center gap-6 rounded-2xl py-10 px-6 w-full">
-            <img src="{{ asset('assets/img/icon-512.png') }}" class="min-w-20 sm:min-w-24 h-20 sm:h-24 object-contain rounded-full select-none hover:opacity-80 transition" draggable="false" alt="Logo" title="SMK Prestasi Prima">
+            <img src="{{ asset('assets/img/icon-512.png') }}" class="min-w-20 sm:min-w-24 h-20 sm:h-24 object-contain rounded-full select-none transition anim-open1" draggable="false" alt="Logo" title="SMK Prestasi Prima">
             <div class="flex flex-col tracking-wide">
-                <h1 class="text-3xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-300 mb-1">Presensi PKL</h1>
-                <span class="text-base sm:text-xl text-gray-300 font-extrabold">SMK Prestasi Prima</span>
+                <h1 class="text-3xl sm:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-300 mb-1 anim-open2">Presensi PKL</h1>
+                <span class="text-base sm:text-xl text-gray-300 font-extrabold anim-open3">SMK Prestasi Prima</span>
             </div>
-            <p class="text-gray-300 text-sm sm:text-base mb-2">Selamat datang di <span class="text-orange-400">Aplikasi Presensi PKL</span>.<br>Silakan login menggunakan akun sekolah Anda.</p>
+            <p class="text-gray-300 text-sm sm:text-base mb-2 anim-open4">Selamat datang di <span class="text-orange-400">Aplikasi Presensi PKL</span>.<br>Silakan login menggunakan akun sekolah Anda.</p>
         </div>
     </section>
-    <section class="fixed bottom-6 flex flex-col w-5/6 max-w-md">
-        <a href="/auth/google" title="Login dengan Akun Sekolah" class="w-full flex items-center justify-center py-3 gap-3 bg-blue-950 hover:bg-blue-950/50 transition transform active:scale-95 rounded-lg shadow-lg border border-white/10 select-none text-sm sm:text-base mb-3">
+    <section class="fixed bottom-6 flex flex-col w-full max-w-lg px-4">
+        <a href="/auth/google" title="Login dengan Akun Sekolah" class="w-full flex items-center justify-center py-3 gap-3 bg-blue-950 hover:bg-blue-900/70 transition transform active:scale-95 rounded-lg shadow-lg border border-white/10 select-none text-sm sm:text-base mb-3 anim-open5">
             <svg viewBox="-3 0 262 262" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" fill="#000000" class="min-w-5 sm:min-w-6 h-5 sm:h-6">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -200,7 +242,7 @@
             </svg>
             <span class="text-gray-300 font-semibold tracking-wide">Login dengan Akun Sekolah</span>
         </a>
-        <span class="w-full flex justify-center text-gray-500 text-xs">&copy; Orens Solutions {{ date('Y') }}</span>
+        <span class="w-full flex justify-center text-gray-500 text-xs anim-open6">&copy; Orens Solutions {{ date('Y') }}</span>
     </section>
 
     <!-- ///////////// Js Files ////////////////////  -->
@@ -228,6 +270,85 @@
         });
     </script>
     @endif
+
+    <script>
+        // You can change the texts here
+        var OnlineText = "Connected to the Internet";
+        var OfflineText = "No Internet Connection";
+
+        // Online Mode Toast Append
+        function onlineModeToast() {
+            // Tambahkan toast dengan Tailwind, auto hilang setelah 3 detik
+            const toastId = 'online-toast-' + Date.now();
+            $("body").append(
+                `<div id="${toastId}" class="fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-lime-800 text-white px-4 py-2 rounded shadow-lg transition-opacity duration-500 opacity-100">
+                    <div class="in"><div class="text">${OnlineText}</div></div>
+                </div>`
+            );
+            setTimeout(() => {
+                $(`#${toastId}`).addClass('opacity-0');
+                setTimeout(() => {
+                    $(`#${toastId}`).remove();
+                }, 500); // tunggu transisi hilang
+            }, 3000);
+        }
+
+        // Ofline Mode Toast Append
+        function offlineModeToast() {
+            // Versi online: toast offline dengan style dan animasi tailwind, auto hilang setelah 3 detik
+            const toastId = 'offline-toast-' + Date.now();
+            $("body").append(
+                `<div id="${toastId}" class="fixed top-6 left-1/2 -translate-x-1/2 z-50 bg-red-700 text-white px-4 py-2 rounded shadow-lg transition-opacity duration-500 opacity-100">
+                    <div class="in"><div class="text">${OfflineText}</div></div>
+                </div>`
+            );
+            setTimeout(() => {
+                $(`#${toastId}`).addClass('opacity-0');
+                setTimeout(() => {
+                    $(`#${toastId}`).remove();
+                }, 500); // tunggu transisi hilang
+            }, 3000);
+        }
+
+        // Online Mode Function
+        function onlineMode() {
+            if ($("#offline-toast").hasClass("show")) {
+                $("#offline-toast").removeClass("show");
+            }
+            if ($("#online-toast").length > 0) {
+                $("#online-toast").addClass("show");
+                setTimeout(() => {
+                    $("#online-toast").removeClass("show");
+                }, 3000);
+            }
+            else {
+                onlineModeToast();
+            }
+            $(".toast-box.tap-to-close").click(function () {
+                $(this).removeClass("show");
+            });
+        }
+
+        // Offline Mode Function
+        function offlineMode() {
+            if ($("#online-toast").hasClass("show")) {
+                $("#online-toast").removeClass("show");
+            }
+            if ($("#offline-toast").length > 0) {
+                $("#offline-toast").addClass("show");
+            }
+            else {
+                offlineModeToast();
+            }
+            $(".toast-box.tap-to-close").click(function () {
+                $(this).removeClass("show");
+            });
+        }
+
+        // Check with event listener if online or offline
+        window.addEventListener('online', onlineMode);
+        window.addEventListener('offline', offlineMode);
+    </script>
 </body>
 
 </html>

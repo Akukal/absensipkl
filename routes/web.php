@@ -69,8 +69,9 @@ Route::group(['middleware' => ['guru']], function(){
 
 
 //----------Siswa Route----------
-Route::group(['middleware' => ['siswa']], function(){
+// Route::group(['middleware' => ['siswa']], function(){
     Route::get('/home', [SiswaController::class, 'index'])->name('home');
+
     Route::get('/create', [SiswaController::class, 'create']);
     Route::post('/create', [SiswaController::class, 'store']);
     Route::get('/histori', [SiswaController::class, 'histori']);
@@ -79,7 +80,7 @@ Route::group(['middleware' => ['siswa']], function(){
 
     Route::get('/izin', [SiswaController::class, 'izin']);
     Route::post('/izin', [SiswaController::class, 'izinstore']);
-});
+// });
 //----------Siswa Route----------
 
 

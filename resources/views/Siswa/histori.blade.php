@@ -42,11 +42,50 @@
     }
     </style>
 @endsection
+
+
 @section('content')
+@php
+    // Data dummy untuk histori absensi
+    $bulan = $bulan ?? 6;
+    $absen = [
+        (object)[
+            'tanggal' => '2024-06-01',
+            'status' => 'Hadir',
+            'keterangan' => 'Masuk - WFO'
+        ],
+        (object)[
+            'tanggal' => '2024-06-02',
+            'status' => 'Tidak Hadir',
+            'keterangan' => 'Tanpa Keterangan'
+        ],
+        (object)[
+            'tanggal' => '2024-06-03',
+            'status' => 'Izin',
+            'keterangan' => 'Izin Sakit'
+        ],
+        (object)[
+            'tanggal' => '2024-06-04',
+            'status' => 'Hadir',
+            'keterangan' => 'Masuk - WFH'
+        ],
+        (object)[
+            'tanggal' => '2024-06-05',
+            'status' => 'Hadir',
+            'keterangan' => 'Masuk - WFO'
+        ]
+    ];
+    $siswa = (object)[
+        'kelas' => 'XII TKJ 2'
+    ];
+    $perusahaan = (object)[
+        'nama' => 'PT. Pintar Berjaya Digital'
+    ];
+@endphp 
 <div class="section" id="user-section">
     <div id="user-detail" style="margin-top: 55px">
         <div id="user-info">
-            <h3 id="user-name">{{ Auth::user()->nama }}</h3>
+            <h3 id="user-name">{{ Auth::user()->nama ?? 'hi' }}</h3>
             <span id="user-role">{{ $siswa->kelas }}</span>
             <p style="margin-top: 15px">
                 <span id="user-role">{{ $perusahaan->nama }}</span>

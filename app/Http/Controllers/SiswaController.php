@@ -37,28 +37,31 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        $siswa = $this->getOrCreateSiswa($user);
+        // $user = Auth::user();
+        // $siswa = $this->getOrCreateSiswa($user);
 
-        // Jika setelah dicek/dibuat data siswa tetap tidak ada (misal, user bukan siswa), logout.
-        if (!$siswa) {
-            return redirect('/logout')->with(['error' => 'Data siswa Anda tidak dapat ditemukan atau dibuat.']);
-        }
+        // // Jika setelah dicek/dibuat data siswa tetap tidak ada (misal, user bukan siswa), logout.
+        // if (!$siswa) {
+        //     return redirect('/logout')->with(['error' => 'Data siswa Anda tidak dapat ditemukan atau dibuat.']);
+        // }
 
-        // Ambil data lain hanya jika $siswa ditemukan.
-        $perusahaan = $siswa->id_perusahaan ? Perusahaan::find($siswa->id_perusahaan) : null;
-        $absen = Absen::where('id_siswa', $siswa->id)
-                      ->whereDate('tanggal', Carbon::today())
-                      ->first();
+        // // Ambil data lain hanya jika $siswa ditemukan.
+        // $perusahaan = $siswa->id_perusahaan ? Perusahaan::find($siswa->id_perusahaan) : null;
+        // $absen = Absen::where('id_siswa', $siswa->id)
+        //               ->whereDate('tanggal', Carbon::today())
+        //               ->first();
 
-        $data = [
-            'absen'       => $absen,
-            'title'       => 'Home',
-            'akun'        => $user,
-            'siswa'       => $siswa,
-            'perusahaan'  => $perusahaan
-        ];
-        return view('Siswa.dashboard', $data); // Menghapus spasi setelah nama view
+        // $data = [
+        //     'absen'       => $absen,
+        //     'title'       => 'Home',
+        //     'akun'        => $user,
+        //     'siswa'       => $siswa,
+        //     'perusahaan'  => $perusahaan
+        // ];
+        // return view('Siswa.dashboard', $data); // Menghapus spasi setelah nama view
+
+        $title = 'Home';
+        return view('Siswa.dashboard', compact('title')); // Menghapus spasi setelah nama view
     }
 
     /**
@@ -66,20 +69,21 @@ class SiswaController extends Controller
      */
     public function create()
     {
-        $user = Auth::user();
-        $siswa = $this->getOrCreateSiswa($user);
-        $absen = null;
-        if ($siswa) {
-            $absen = Absen::where('id_siswa', $siswa->id)
-                ->whereDate('tanggal', Carbon::today())
-                ->first();
-        }
-        $data = [
-            'hari'  => date("d-m-Y"),
-            'title' => 'Absensi',
-            'absen' => $absen
-        ];
-        return view('Siswa.create', $data);
+        // $user = Auth::user();
+        // $siswa = $this->getOrCreateSiswa($user);
+        // $absen = null;
+        // if ($siswa) {
+        //     $absen = Absen::where('id_siswa', $siswa->id)
+        //         ->whereDate('tanggal', Carbon::today())
+        //         ->first();
+        // }
+        // $data = [
+        //     'hari'  => date("d-m-Y"),
+        //     'title' => 'Absensi',
+        //     'absen' => $absen
+        // ];
+        $title = 'Absensi';
+        return view('Siswa.create', compact('title'));
     }
 
     /**
@@ -247,31 +251,32 @@ class SiswaController extends Controller
      */
     public function histori(Request $request)
     {
-        $user = Auth::user();
-        $siswa = $this->getOrCreateSiswa($user);
+        // $user = Auth::user();
+        // $siswa = $this->getOrCreateSiswa($user);
 
-        if (!$siswa) {
-            return redirect('/logout')->with(['error' => 'Data siswa tidak ditemukan.']);
-        }
+        // if (!$siswa) {
+        //     return redirect('/logout')->with(['error' => 'Data siswa tidak ditemukan.']);
+        // }
 
-        $perusahaan = $siswa->id_perusahaan ? Perusahaan::find($siswa->id_perusahaan) : null;
+        // $perusahaan = $siswa->id_perusahaan ? Perusahaan::find($siswa->id_perusahaan) : null;
         
-        $bulan = $request->bulan ?? Carbon::now()->month;
-        $absen = Absen::where('id_siswa', $siswa->id)
-              ->where(function($query) use ($bulan) {
-                  $query->whereMonth('tanggal', $bulan)
-                        ->orWhereNull('tanggal');
-              })
-              ->get();
+        // $bulan = $request->bulan ?? Carbon::now()->month;
+        // $absen = Absen::where('id_siswa', $siswa->id)
+        //       ->where(function($query) use ($bulan) {
+        //           $query->whereMonth('tanggal', $bulan)
+        //                 ->orWhereNull('tanggal');
+        //       })
+        //       ->get();
 
-        $data = [
-            'title'       => 'Histori',
-            'bulan'       => $bulan,
-            'absen'       => $absen,
-            'akun'        => $user,
-            'siswa'       => $siswa,
-            'perusahaan'  => $perusahaan
-        ];
-        return view('Siswa.histori', $data);
+        // $data = [
+        //     'title'       => 'Histori',
+        //     'bulan'       => $bulan,
+        //     'absen'       => $absen,
+        //     'akun'        => $user,
+        //     'siswa'       => $siswa,
+        //     'perusahaan'  => $perusahaan
+        // ];
+        $title = "Histori";
+        return view('Siswa.histori', compact('title'));
     }
 }
