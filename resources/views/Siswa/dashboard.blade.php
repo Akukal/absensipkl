@@ -76,7 +76,7 @@
                 <div class="flex-1 w-full">
                     <div class="grid grid-cols-2 divide-x divide-gray-700">
                         <!-- Absen Masuk -->
-                        <div class="flex flex-col items-center py-4 px-3">
+                        <div class="flex flex-col items-center py-2 px-3">
                             <span class="text-gray-400 text-xs font-medium mb-1 tracking-wide">Absen Masuk</span>
                             <span class="
                                 text-2xl font-bold 
@@ -86,7 +86,7 @@
                             </span>
                         </div>
                         <!-- Absen Keluar -->
-                        <div class="flex flex-col items-center py-4 px-3">
+                        <div class="flex flex-col items-center py-2 px-3">
                             <span class="text-gray-400 text-xs font-medium mb-1 tracking-wide">Absen Keluar</span>
                             <span class="
                                 text-2xl font-bold 
