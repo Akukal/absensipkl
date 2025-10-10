@@ -115,7 +115,7 @@
     </style>
 </head>
 
-<body class="bg-gray-900">
+<body class="font-['Poppins'] bg-gray-900">
 
     <!-- loader -->
     <div id="loader" style="background: #020617 !important;">

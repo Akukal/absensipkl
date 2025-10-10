@@ -52,7 +52,7 @@
         ];
     @endphp
     
-    <section class="w-full max-w-lg min-h-screen mx-auto flex flex-col justify-center gap-4 text-gray-300 py-28">
+    <section class="w-full max-w-lg min-h-screen mx-auto flex flex-col justify-center gap-4 text-gray-300 py-24">
         <div class="w-full flex flex-col items-center justify-center gap-6 px-4">
             <div class="relative bg-gray-800 rounded-2xl shadow-2xl py-6 px-8 w-full max-w-md flex items-center gap-4 border border-gray-700">
                 <span class="inline-flex items-center justify-center w-20 h-20 bg-gray-700 rounded-full">
@@ -110,11 +110,11 @@
                         class="w-full h-full object-cover rounded-xl border border-gray-600 bg-gray-900"
                     >
                 @elseif ($absen && empty($absen->foto_masuk) && $absen->status != 'Izin')
-                    <span class="text-sm sm:text-base text-gray-400 italic">Belum ada foto masuk</span>
+                    <span class="text-sm text-gray-400 italic">Belum ada foto masuk</span>
                 @elseif ($absen && $absen->status == 'Izin')
-                    <span class="text-sm sm:text-base text-orange-400 italic">Tidak ada foto (Izin)</span>
+                    <span class="text-sm text-orange-400 italic">Tidak ada foto (Izin)</span>
                 @else
-                    <span class="text-sm sm:text-base text-gray-400 italic">Tidak ada data absen hari ini</span>
+                    <span class="text-sm text-gray-400 italic">Tidak ada data absen hari ini</span>
                 @endif
             </div>
             <div class="relative bg-gray-800 rounded-2xl shadow-2xl py-6 px-8 w-full max-w-md flex flex-col gap-4 border border-gray-700">
@@ -129,11 +129,11 @@
                         class="w-full h-full object-cover rounded-xl border border-gray-600 bg-gray-900"
                     >
                 @elseif ($absen && empty($absen->foto_keluar) && $absen->status != 'Izin')
-                    <span class="text-sm sm:text-base text-gray-400 italic">Belum ada foto keluar</span>
+                    <span class="text-sm text-gray-400 italic">Belum ada foto keluar</span>
                 @elseif ($absen && $absen->status == 'Izin')
-                    <span class="text-sm sm:text-base text-orange-400 italic">Tidak ada foto (Izin)</span>
+                    <span class="text-sm text-orange-400 italic">Tidak ada foto (Izin)</span>
                 @else
-                    <span class="text-sm sm:text-base text-gray-400 italic">Tidak ada data absen hari ini</span>
+                    <span class="text-sm text-gray-400 italic">Tidak ada data absen hari ini</span>
                 @endif
             </div>
         </div>

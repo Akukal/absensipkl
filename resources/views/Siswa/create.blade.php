@@ -136,7 +136,7 @@
         $hari = 'Senin, 22 Januari 2024';
     @endphp
 
-    <section class="w-full min-h-screen max-w-lg mx-auto flex flex-col py-20 justify-center gap-4 px-4 text-gray-300 py-28">
+    <section class="w-full min-h-screen max-w-lg mx-auto flex flex-col py-20 justify-center gap-4 px-4 text-gray-300 py-24">
         <div class="w-full flex flex-col items-center justify-center gap-6">
             <div class="relative bg-gray-800 rounded-2xl shadow-2xl py-6 px-6 w-full max-w-md flex flex-col items-center gap-2 border border-gray-700">
                 <div class="attendance-option w-full flex items-center border border-gray-600 px-4 py-2 gap-2 rounded-lg select-none cursor-pointer" id="option-wfo" onclick="selectAttendanceType('WFO')">
