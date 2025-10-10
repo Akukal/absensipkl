@@ -43,9 +43,9 @@
         ];
         // Dummy absen: Sudah absen masuk, belum absen keluar
         $absen = (object)[
-            'jam_masuk' => '07:15:23',
-            'jam_keluar' => '16:00:01',
-            'status' => 'Hadir',
+            'jam_masuk' => null,
+            'jam_keluar' => null,
+            'status' => 'Tidak Hadir',
             'foto_masuk' => null,
             'foto_keluar' => null,
             'foto' => null
@@ -54,7 +54,7 @@
     
     <section class="w-full max-w-lg min-h-screen mx-auto flex flex-col justify-center gap-4 text-gray-300 py-24">
         <div class="w-full flex flex-col items-center justify-center gap-6 px-4">
-            <div class="relative bg-gray-800 rounded-2xl shadow-2xl py-6 px-8 w-full max-w-md flex items-center gap-4 border border-gray-700">
+            <div class="relative bg-gray-800 rounded-2xl shadow-2xl py-6 px-6 w-full max-w-md flex items-center gap-4 border border-gray-700">
                 <span class="inline-flex items-center justify-center w-20 h-20 bg-gray-700 rounded-full">
                     <ion-icon name="person-circle-outline" class="text-9xl text-white"></ion-icon>
                 </span>
@@ -69,7 +69,7 @@
                     <p class="text-xs sm:text-sm text-orange-400 font-semibold">{{ $perusahaan->nama }}</p>
                 </div>
             </div>
-            <div class="relative bg-gray-800 rounded-2xl shadow-2xl py-6 px-8 w-full max-w-md flex flex-col sm:flex-row items-center border border-gray-700">
+            <div class="relative bg-gray-800 rounded-2xl shadow-2xl py-6 px-6 w-full max-w-md flex flex-col sm:flex-row items-center border border-gray-700">
                 <span class="hidden sm:inline-flex items-center justify-center w-20 h-20 bg-gray-700 rounded-full">
                     <ion-icon name="time-outline" class="text-7xl text-white"></ion-icon>
                 </span>
@@ -80,7 +80,7 @@
                             <span class="text-gray-400 text-xs font-medium mb-1 tracking-wide">Absen Masuk</span>
                             <span class="
                                 text-2xl font-bold 
-                                {{ is_null($absen) || (optional($absen)->jam_masuk == null && optional($absen)->status != 'Izin') ? 'text-red-600' : (optional($absen)->status == 'Izin' ? 'text-orange-400' : 'text-lime-400') }}
+                                {{ is_null($absen) || (optional($absen)->jam_masuk == null && optional($absen)->status != 'Izin') ? 'text-red-600' : (optional($absen)->status == 'Izin' ? 'text-orange-400' : 'text-green-400') }}
                                 ">
                                 {{ is_null($absen) ? '--:--:--' : (optional($absen)->status == 'Izin' ? 'Izin' : (optional($absen)->jam_masuk ?? '--:--:--')) }}
                             </span>
@@ -90,7 +90,7 @@
                             <span class="text-gray-400 text-xs font-medium mb-1 tracking-wide">Absen Keluar</span>
                             <span class="
                                 text-2xl font-bold 
-                                {{ is_null($absen) || (optional($absen)->jam_keluar == null && optional($absen)->status != 'Izin') ? 'text-red-600' : (optional($absen)->status == 'Izin' ? 'text-orange-400' : 'text-lime-400') }}
+                                {{ is_null($absen) || (optional($absen)->jam_keluar == null && optional($absen)->status != 'Izin') ? 'text-red-600' : (optional($absen)->status == 'Izin' ? 'text-orange-400' : 'text-green-400') }}
                                 ">
                                 {{ is_null($absen) ? '--:--:--' : (optional($absen)->status == 'Izin' ? 'Izin' : (optional($absen)->jam_keluar ?? '--:--:--')) }}
                             </span>
@@ -98,7 +98,7 @@
                     </div>
                 </div>
             </div>
-            <div class="relative bg-gray-800 rounded-2xl shadow-2xl py-6 px-8 w-full max-w-md flex flex-col gap-4 border border-gray-700">
+            <div class="relative bg-gray-800 rounded-2xl shadow-2xl py-6 px-6 w-full max-w-md flex flex-col gap-4 border border-gray-700">
                 <span class="font-semibold text-white text-lg flex items-center gap-1">
                     <ion-icon name="aperture-outline"></ion-icon>
                     Absen Masuk
@@ -117,7 +117,7 @@
                     <span class="text-sm text-gray-400 italic">Tidak ada data absen hari ini</span>
                 @endif
             </div>
-            <div class="relative bg-gray-800 rounded-2xl shadow-2xl py-6 px-8 w-full max-w-md flex flex-col gap-4 border border-gray-700">
+            <div class="relative bg-gray-800 rounded-2xl shadow-2xl py-6 px-6 w-full max-w-md flex flex-col gap-4 border border-gray-700">
                 <span class="font-semibold text-white text-lg flex items-center gap-1">
                     <ion-icon name="aperture-outline"></ion-icon>
                     Absen Keluar

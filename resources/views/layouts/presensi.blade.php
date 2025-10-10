@@ -2,33 +2,61 @@
 <html lang="en">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ config('app.url') }}">
+    <meta property="og:title" content="Presensi PKL" />
+    <meta property="og:description" content="Siakad PKL SMK Prestasi Prima" />
+    <meta property="og:image" content="{{ asset('assets/img/icon-512.png') }}" />
+    <meta name="description" content="Siakad PKL SMK Prestasi Prima">
+    <meta name="keywords" content="SIAKAD PKL SMK PRESTASI PRIMA" />
+    <meta name="theme-color" content="#004AAD">
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#000000">
     <title>{{ $title }} - Presensi PKL</title>
-    <meta name="description" content="Mobilekit HTML Mobile UI Kit">
-    <meta name="keywords" content="bootstrap 4, mobile template, cordova, phonegap, mobile, html" />
-    <meta name="description" content="Mobilekit HTML Mobile UI Kit">
-    <meta name="keywords" content="SIAKAD PKL SMK PRESTASI PRIMA" />
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('icon-512.png') }}">
-    @if (!request()->is('home') && !request()->is('create'))
-    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
-    @endif
-    <link rel="icon" type="image/png" href="{{ asset('assets/img/icon-512.png') }}" sizes="32x32">
-    
+
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    
+    <!-- KOREKSI: Path gambar diubah untuk menyertakan '/assets/' -->
+    <link rel="icon" type="image/png" href="{{ asset('assets/img/icon-512.png') }}" sizes="32x32">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/img/icon-512.png') }}">
+
+    @if (!request()->is('home') && !request()->is('create') && !request()->is('histori') && !request()->is('izin'))
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+    @endif
 
     <style>
+        *, html {
+            font-family: 'Poppins';
+        }
+
+        /* Scrollbar styling for mobile */
+        .overflow-y-auto::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .overflow-y-auto::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .overflow-y-auto::-webkit-scrollbar-thumb {
+            background: #9a3412; /* blue-500 */
+            border-radius: 12px;
+        }
+
+        .overflow-y-auto::-webkit-scrollbar-thumb:hover {
+            background: #9a3412; /* blue-500 */
+        }
+
         .selectmaterialize {
             display: block;
             background-color: transparent !important;
@@ -115,7 +143,7 @@
     </style>
 </head>
 
-<body class="font-['Poppins'] bg-gray-900">
+<body class="font-['Poppins'] bg-gray-900 overflow-x-hidden overflow-y-auto">
 
     <!-- loader -->
     <div id="loader" style="background: #020617 !important;">
@@ -127,12 +155,12 @@
     <section class="fixed top-0 z-40 w-full bg-gray-800 border-b-1 border-gray-700 text-gray-300 flex justify-center shadow-xl">
         <div class="w-full max-w-lg flex items-center justify-between px-4 py-2">
             <a href="{{ url('/home') }}" class="text-transparent bg-clip-text bg-gradient-to-r text-lg from-orange-400 to-orange-300 font-extrabold">Presensi PKL</a>
-            <div class="text-sm sm:text-base" id="jam"></div>
+            <div class="text-sm" id="jam"></div>
         </div>
     </section>
 
     <!-- App Capsule -->
-    <div id="appCapsule" class="bg-gray-900 w-full min-h-screen">
+    <div id="appCapsule" class="bg-gray-90  0 w-full min-h-screen">
         @yield('content')
     </div>  
     <!-- * App Capsule -->
