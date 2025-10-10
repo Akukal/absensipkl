@@ -164,7 +164,7 @@
                 <div class="relative w-full flex flex-col items-center">
                     <input type="hidden" id="lokasi">
                     <input type="hidden" id="attendance_type_selected">
-                    <div class="webcam-capture bg-gray-900 rounded-xl border border-gray-700 w-full aspect-video flex items-center justify-center overflow-hidden">
+                    <div class="webcam-capture bg-gray-900 rounded-xl border border-gray-700 w-full aspect-[9/12] sm:w-[520px] sm:aspect-[16/9] flex items-center justify-center overflow-hidden mx-auto">
                         <!-- Kamera akan muncul di sini -->
                     </div>
                 </div>

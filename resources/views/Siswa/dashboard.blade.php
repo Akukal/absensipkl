@@ -104,11 +104,11 @@
                     Absen Masuk
                 </span>
                 @if($absen && !empty($absen->foto_masuk) && $absen->status != 'Izin')
-                    <img 
-                        src="{{ asset('upload/foto_masuk/' . $absen->foto_masuk) }}" 
-                        alt="Foto Masuk" 
-                        class="w-full h-full object-cover rounded-xl border border-gray-600 bg-gray-900"
-                    >
+                <img 
+                    src="{{ asset('storage/absensi/' . $absen->foto_masuk) }}" 
+                    alt="Foto Masuk" 
+                    class="w-full h-full object-cover rounded-xl border border-gray-600 bg-gray-900"
+                >
                 @elseif ($absen && empty($absen->foto_masuk) && $absen->status != 'Izin')
                     <span class="text-sm text-gray-400 italic">Belum ada foto masuk</span>
                 @elseif ($absen && $absen->status == 'Izin')
@@ -123,11 +123,11 @@
                     Absen Keluar
                 </span>
                 @if($absen && !empty($absen->foto_keluar) && $absen->status != 'Izin')
-                    <img 
-                        src="{{ asset('upload/foto_keluar/' . $absen->foto_keluar) }}" 
-                        alt="Foto Keluar" 
-                        class="w-full h-full object-cover rounded-xl border border-gray-600 bg-gray-900"
-                    >
+                <img 
+                    src="{{ asset('storage/absensi/' . $absen->foto_keluar) }}" 
+                    alt="Foto Keluar" 
+                    class="w-full h-full object-cover rounded-xl border border-gray-600 bg-gray-900"
+                >
                 @elseif ($absen && empty($absen->foto_keluar) && $absen->status != 'Izin')
                     <span class="text-sm text-gray-400 italic">Belum ada foto keluar</span>
                 @elseif ($absen && $absen->status == 'Izin')
