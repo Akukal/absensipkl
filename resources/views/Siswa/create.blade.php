@@ -141,7 +141,7 @@
             <div class="relative bg-gray-800 rounded-2xl shadow-2xl py-6 px-6 w-full max-w-md flex flex-col items-center gap-2 border border-gray-700">
                 <div class="attendance-option w-full flex items-center border border-gray-600 px-4 py-2 gap-2 rounded-lg select-none cursor-pointer" id="option-wfo" onclick="selectAttendanceType('WFO')">
                     <input type="radio" id="wfo" name="attendance_type" value="WFO" class="hidden">
-                    <ion-icon name="laptop-outline" class="text-2xl"></ion-icon>
+                    <ion-icon name="business-outline" class="text-2xl"></ion-icon>
                     <div class="">
                         <div class="text-sm sm:text-base font-bold">Work From Office (WFO)</div>
                         <div class="text-xs sm:text-sm">Hadir di kantor/tempat PKL</div>
@@ -150,7 +150,7 @@
                 
                 <div class="attendance-option w-full flex items-center border border-gray-600 px-4 py-2 gap-2 rounded-lg select-none cursor-pointer" id="option-wfh" onclick="selectAttendanceType('WFH')">
                     <input type="radio" id="wfh" name="attendance_type" value="WFH" class="hidden">
-                    <ion-icon name="business-outline" class="text-2xl"></ion-icon>
+                    <ion-icon name="laptop-outline" class="text-2xl"></ion-icon>
                     <div class="">
                         <div class="text-sm sm:text-base font-bold">Work From Home (WFH)</div>
                         <div class="text-xs sm:text-sm">Bekerja dari rumah</div>
