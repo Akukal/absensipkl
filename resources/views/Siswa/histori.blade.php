@@ -52,7 +52,8 @@
             (object)[
                 'tanggal' => '2024-06-01',
                 'status' => 'Hadir',
-
+                'jam_masuk' => null,
+                'jam_keluar' => '07:52:00',
             ],
             (object)[
                 'tanggal' => '2024-06-02',
@@ -97,11 +98,134 @@
             (object)[
                 'tanggal' => '2024-06-10',
                 'status' => 'Hadir',
+                'jam_masuk' => '06:00:00',
+                'jam_keluar' => '07:52:00',
                 
             ],
             (object)[
                 'tanggal' => '2024-06-11',
                 'status' => 'Hadir',
+                'jam_masuk' => '06:00:00',
+                'jam_keluar' => '07:52:00',
+                
+            ],
+            (object)[
+                'tanggal' => '2024-06-12',
+                'status' => 'Hadir',
+                'jam_masuk' => '06:00:00',
+                'jam_keluar' => '07:52:00',
+                
+            ],
+            (object)[
+                'tanggal' => '2024-06-13',
+                'status' => 'Hadir',
+                'jam_masuk' => '06:00:00',
+                'jam_keluar' => '07:52:00',
+                
+            ],
+            (object)[
+                'tanggal' => '2024-06-14',
+                'status' => 'Hadir',
+                'jam_masuk' => '06:00:00',
+                'jam_keluar' => '07:52:00',
+                
+            ],
+            (object)[
+                'tanggal' => '2024-06-15',
+                'status' => 'Hadir',
+                'jam_masuk' => '06:00:00',
+                'jam_keluar' => '07:52:00',
+                
+            ],
+            (object)[
+                'tanggal' => '2024-06-16',
+                'status' => 'Hadir',
+                'jam_masuk' => '06:00:00',
+                'jam_keluar' => '07:52:00',
+                
+            ],
+            (object)[
+                'tanggal' => '2024-06-17',
+                'status' => 'Hadir',
+                'jam_masuk' => '06:00:00',
+                'jam_keluar' => '07:52:00',
+                
+            ],
+            (object)[
+                'tanggal' => '2024-06-18',
+                'status' => 'Hadir',
+                'jam_masuk' => '06:00:00',
+                'jam_keluar' => '07:52:00',
+                
+            ],
+            (object)[
+                'tanggal' => '2024-06-19',
+                'status' => 'Hadir',
+                'jam_masuk' => '06:00:00',
+                'jam_keluar' => '07:52:00',
+                
+            ],
+            (object)[
+                'tanggal' => '2024-06-20',
+                'status' => 'Hadir',
+                'jam_masuk' => '06:00:00',
+                'jam_keluar' => '07:52:00',
+                
+            ],
+            (object)[
+                'tanggal' => '2024-06-21',
+                'status' => 'Hadir',
+                'jam_masuk' => '06:00:00',
+                'jam_keluar' => '07:52:00',
+                
+            ],
+            (object)[
+                'tanggal' => '2024-06-22',
+                'status' => 'Hadir',
+                'jam_masuk' => '06:00:00',
+                'jam_keluar' => '07:52:00',
+                
+            ],
+            (object)[
+                'tanggal' => '2024-06-23',
+                'status' => 'Hadir',
+                'jam_masuk' => '06:00:00',
+                'jam_keluar' => '07:52:00',
+                
+            ],
+            (object)[
+                'tanggal' => '2024-06-24',
+                'status' => 'Hadir',
+                'jam_masuk' => '06:00:00',
+                'jam_keluar' => '07:52:00',
+                
+            ],
+            (object)[
+                'tanggal' => '2024-06-25',
+                'status' => 'Hadir',
+                'jam_masuk' => '06:00:00',
+                'jam_keluar' => '07:52:00',
+                
+            ],
+            (object)[
+                'tanggal' => '2024-06-26',
+                'status' => 'WFH',
+                'jam_masuk' => '06:00:00',
+                'jam_keluar' => '07:52:00',
+                
+            ],
+            (object)[
+                'tanggal' => '2024-06-27',
+                'status' => 'Hadir',
+                'jam_masuk' => '06:00:00',
+                'jam_keluar' => '07:52:00',
+                
+            ],
+            (object)[
+                'tanggal' => '2024-06-28',
+                'status' => 'Hadir',
+                'jam_masuk' => null,
+                'jam_keluar' => '07:52:00',
             ]
         ];
         $akun = (object)[
@@ -124,7 +248,7 @@
                         @php
                             $namaAkun = $akun->nama;
                             $namaLength = mb_strlen($namaAkun);
-                            $namaClass = $namaLength > 24 ? 'text-sm sm:text-base' : 'text-base sm:text-lg';
+                            $namaClass = $namaLength > 24 ? 'text-base' : 'text-lg';
                         @endphp
                         <h3 class="{{ $namaClass }} font-bold text-white mb-1">{{ $namaAkun }}</h3>
                         <p class="text-xs sm:text-sm text-gray-400 mb-1">{{ $siswa->kelas }}</p>
@@ -133,7 +257,7 @@
                 </div>
                 <div class="relative bg-gray-800 rounded-2xl shadow-2xl py-6 px-6 w-full max-w-md flex flex-col items-center gap-4 border border-gray-700">
                     <form method="GET" class="w-full">
-                        <select name="bulan" id="bulan" class="bg-gray-700 border border-gray-600 text-gray-300 text-sm rounded-lg focus:outline-none focus:border-orange-400 focus:ring focus:ring-orange-500/50 block w-full py-2.5" onchange="this.form.submit()">
+                        <select name="bulan" id="bulan" class="bg-gray-700 border border-gray-600 text-gray-300 text-sm rounded-lg focus:outline-none focus:border-orange-400 block w-full py-2.5 transition" onchange="this.form.submit()">
                             <option class="bg-gray-800 text-gray-300 border border-gray-700" value="6" {{ $bulan == 6 ? 'selected' : '' }}>Juni</option>
                             <option class="bg-gray-800 text-gray-300 border border-gray-700" value="7" {{ $bulan == 7 ? 'selected' : '' }}>Juli</option>
                             <option class="bg-gray-800 text-gray-300 border border-gray-700" value="8" {{ $bulan == 8 ? 'selected' : '' }}>Agustus</option>
@@ -160,17 +284,19 @@
                                         <td class="px-2 py-2 text-center">{{ $key+1 }}</td>
                                         <td class="px-2 py-2 whitespace-nowrap">{{ $item->tanggal }}</td>
                                         <td class="px-2 py-2 whitespace-nowrap">
-                                            <span class="@if($item->status=='Hadir') text-green-400 font-semibold 
+                                            <span class="
+                                                @if($item->status=='Hadir') text-green-400 font-semibold 
+                                                @elseif($item->status=='WFH') text-blue-400 font-semibold 
                                                 @elseif($item->status=='Izin') text-orange-400 font-semibold 
                                                 @else text-red-400 font-semibold @endif">
                                                 {{ $item->status }}
                                             </span>
                                         </td>
                                         <td class="px-2 py-2 whitespace-nowrap">
-                                            {{ is_null($absen) ? '--:--:--' : (optional($absen)->status == 'Izin' ? '--:--:--' : (optional($absen)->jam_masuk ?? '--:--:--')) }}
+                                            {{ $item->status == 'Izin' ? '--:--:--' : ($item->jam_masuk ?? '--:--:--') }}
                                         </td>
                                         <td class="px-2 py-2 whitespace-nowrap">
-                                            {{ is_null($absen) ? '--:--:--' : (optional($absen)->status == 'Izin' ? '--:--:--' : (optional($absen)->jam_keluar ?? '--:--:--')) }}
+                                            {{ $item->status == 'Izin' ? '--:--:--' : ($item->jam_keluar ?? '--:--:--') }}
                                         </td>
                                     </tr>
                                 @endforeach

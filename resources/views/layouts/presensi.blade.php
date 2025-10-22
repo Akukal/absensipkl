@@ -160,7 +160,7 @@
     </section>
 
     <!-- App Capsule -->
-    <div id="appCapsule" class="bg-gray-90  0 w-full min-h-screen">
+    <div id="appCapsule" class="bg-gray-900 w-full min-h-screen">
         @yield('content')
     </div>  
     <!-- * App Capsule -->

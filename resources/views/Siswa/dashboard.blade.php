@@ -44,7 +44,7 @@
         // Dummy absen: Sudah absen masuk, belum absen keluar
         $absen = (object)[
             'jam_masuk' => null,
-            'jam_keluar' => null,
+            'jam_keluar' => '07:52:00',
             'status' => 'Tidak Hadir',
             'foto_masuk' => null,
             'foto_keluar' => null,
@@ -62,7 +62,7 @@
                     @php
                         $namaAkun = $akun->nama;
                         $namaLength = mb_strlen($namaAkun);
-                        $namaClass = $namaLength > 24 ? 'text-sm sm:text-base' : 'text-base sm:text-lg';
+                        $namaClass = $namaLength > 24 ? 'text-base' : 'text-lg';
                     @endphp
                     <h3 class="{{ $namaClass }} font-bold text-white mb-1">{{ $namaAkun }}</h3>
                     <p class="text-xs sm:text-sm text-gray-400 mb-1">{{ $siswa->kelas }}</p>
